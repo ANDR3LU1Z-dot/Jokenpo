@@ -25,6 +25,10 @@ class PlayerFragment : Fragment() {
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         return root
+
+//        savedInstanceState.getString("playSelected")?.let {
+//            men
+//        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,6 +52,12 @@ class PlayerFragment : Fragment() {
             }
 
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val menuSpinner = playerBinding.spinner
+        outState.putString("playSelected",menuSpinner.selectedItemPosition.toString())
     }
 
     @Deprecated("Deprecated in Java")

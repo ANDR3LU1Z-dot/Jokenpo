@@ -1,7 +1,10 @@
 package com.example.jokenpo
 
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -21,11 +24,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var editText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindingMain = ActivityMainBinding.inflate(layoutInflater)
         val toolbarMain = bindingMain.toolbar
+
+//        Log.d("Lifecycle", "onCreate")
 
         setContentView(bindingMain.root)
         setSupportActionBar(toolbarMain)
@@ -35,6 +41,11 @@ class MainActivity : AppCompatActivity() {
         drawer = bindingMain.root
         navDrawer = bindingMain.navView
         bottomNav = bindingMain.bottomNav
+        editText = bindingMain.editText
+
+        savedInstanceState?.getString("editTextValue")?.let {
+            editText.setText(it)
+        }
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHost) as NavHostFragment
@@ -58,6 +69,37 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setupWithNavController(navController)
 
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putString("editTextValue", editText.text.toString())
+    }
+
+    override fun onStart() {
+        super.onStart()
+//        Log.d("Lifecycle", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+//        Log.d("Lifecycle", "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+//        Log.d("Lifecycle", "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+//        Log.d("Lifecycle", "onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+//        Log.d("Lifecycle", "onDestroy")
     }
 
 
