@@ -24,12 +24,12 @@ class CustomObserver: DefaultLifecycleObserver, LifecycleEventObserver {
     override fun onResume(owner: LifecycleOwner) {
         super.onResume(owner)
 
-        Log.d("Lifecycle", "Observer ${owner.toString()} - onResume")
+//        Log.d("Lifecycle", "Observer ${owner.toString()} - onResume")
     }
 
     //Neste método, recebemos o dono do evento e qual o novo estado
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-        Log.d("Lifecycle", "${source.toString()} event: ${event.toString()}")
+        Log.d("Lifecycle", "Observer: ${source.toString()} event: ${event.toString()}")
     }
 
 }

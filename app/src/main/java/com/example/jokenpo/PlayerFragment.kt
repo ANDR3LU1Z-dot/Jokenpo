@@ -23,12 +23,13 @@ class PlayerFragment : Fragment() {
         playerBinding = FragmentPlayerBinding.inflate(inflater, container, false)
         root = playerBinding.root
         setHasOptionsMenu(true)
+
+        //Observador do ciclo de vida dessa Fragment
+        lifecycle.addObserver(CustomObserver())
+
         // Inflate the layout for this fragment
         return root
 
-//        savedInstanceState.getString("playSelected")?.let {
-//            men
-//        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,11 +55,6 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        val menuSpinner = playerBinding.spinner
-        outState.putString("playSelected",menuSpinner.selectedItemPosition.toString())
-    }
 
     @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

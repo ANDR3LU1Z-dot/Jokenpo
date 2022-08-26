@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
 //        super.onResume()
 //        Log.d("Lifecycle", "onResume")
 //    }
-
+//
 //    override fun onPause() {
 //        super.onPause()
 //        Log.d("Lifecycle", "onPause")

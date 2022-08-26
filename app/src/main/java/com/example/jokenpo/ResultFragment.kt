@@ -22,6 +22,9 @@ class ResultFragment : Fragment() {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
         root = resultBinding.root
+
+        //Observador do ciclo de vida dessa Fragment
+        lifecycle.addObserver(CustomObserver())
         return root
     }
 
