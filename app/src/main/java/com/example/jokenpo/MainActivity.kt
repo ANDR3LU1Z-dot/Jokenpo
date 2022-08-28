@@ -1,10 +1,10 @@
 package com.example.jokenpo
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -17,7 +17,7 @@ import com.example.jokenpo.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var bindingMain: ActivityMainBinding
     private lateinit var drawer: DrawerLayout
     private lateinit var navDrawer: NavigationView
@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var editText: EditText
+    private var currentPlay: String = "Pedra"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,6 +111,18 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val plays = resources.getStringArray(R.array.available_plays_array)
+        currentPlay = plays[position]
+
+        Toast.makeText(this, "Jogada Selecionada: ${currentPlay.toString()}", Toast.LENGTH_SHORT)
+            .show()
+
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
     }
 
 
