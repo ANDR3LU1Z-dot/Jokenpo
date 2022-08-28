@@ -1,6 +1,7 @@
 package com.example.jokenpo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.EditText
@@ -67,7 +68,30 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navDrawer.setupWithNavController(navController)
+        navDrawer.setNavigationItemSelectedListener{
+            when(it.itemId){
+                R.id.resultFragment -> {
+                    val args = Bundle()
+                    args.putString("currentPlay", currentPlay)
+                    navController.navigate(it.itemId, args)
+                }
+                else -> navController.navigate(it.itemId)
+            }
+            true
+        }
+
         bottomNav.setupWithNavController(navController)
+        bottomNav.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.resultFragment -> {
+                    val args = Bundle()
+                    args.putString("currentPlay", currentPlay)
+                    navController.navigate(it.itemId, args)
+                }
+                else -> navController.navigate(it.itemId)
+            }
+            true
+        }
 
 
     }
@@ -80,27 +104,27 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onStart() {
         super.onStart()
-//        Log.d("Lifecycle", "onStart")
+        Log.d("Lifecycle", "onStart")
     }
 
     override fun onResume() {
         super.onResume()
-//        Log.d("Lifecycle", "onResume")
+        Log.d("Lifecycle", "onResume")
     }
 
     override fun onPause() {
         super.onPause()
-//        Log.d("Lifecycle", "onPause")
+        Log.d("Lifecycle", "onPause")
     }
 
     override fun onStop() {
         super.onStop()
-//        Log.d("Lifecycle", "onStop")
+        Log.d("Lifecycle", "onStop")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-//        Log.d("Lifecycle", "onDestroy")
+        Log.d("Lifecycle", "onDestroy")
     }
 
 
@@ -113,6 +137,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    //Tratamento para os itens selecionados no spinner
     override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val plays = resources.getStringArray(R.array.available_plays_array)
         currentPlay = plays[position]
